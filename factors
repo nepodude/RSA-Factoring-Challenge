@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+import sys
+import math
+
+def getfactors(my_string):
+    my_number = int(my_string)
+    for i in range (2, int(my_number ** 0.5) + 1):
+        if my_number % i == 0:
+            print("{} = {} * {}".format(my_number, int(my_number / i), i))
+            return
+    print ("{} = {} * {}".format(my_number, my_number, 1))
+
+if len(sys.argv) != 2:
+    print("Usage: python script.py <filename>")
+    sys.exit(1)
+
+file = open(sys.argv[1], 'r')
+
+for line in file:
+    line = line.strip()
+    getfactors(line)
