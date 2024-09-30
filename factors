@@ -5,19 +5,43 @@ import math
 if len(sys.argv) != 2:
     print("Usage: python script.py <filename>")
     sys.exit(1)
+
+def getfactors(n):
+    if n <= 1:
+        return (n , 1)
+    if n % 2 == 0:
+        return (n // 2, 2)
+    sqrt_n = math.isqrt(n)
+    for i in range(3, sqrt_n + 1, 2):
+        if n % i == 0:
+            return (n // i, i)
+    return (n, 1)
+
+def main():
+    if len(sys.argv) != 2:
+        print("USAGE: factors <file>")
+        sys.exit(1)
     
-def getfactors(my_string):
-    my_number = int(my_string)
-    for i in range (2, int(my_number ** 0.5) + 1):
-        if my_number % i == 0:
-            print("{}={}*{}".format(my_number, int(my_number / i), i))
-            return
-    print ("{}={}*{}".format(my_number, my_number, 1))
+    filename = sys.argv[1]
 
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                num_str = line.strip()
+                if not num_str:
+                    continue
+                try:
+                    n = int(num_str)
+                    p, q = getfactors(n)
+                    if q == 1:
+                        print(f"{n}=1*{n}")
+                    print(f"{n}={p}*{q}")
+                except valueError:
+                    print(f"Invalid number: {num_str}")
+                    sys.exit(1)
+    except FileNotFoundError:
+        print(f"Error: Can't open file {filename}")
+        sys.exit(1)
 
-
-file = open(sys.argv[1], 'r')
-
-for line in file:
-    line = line.strip()
-    getfactors(line)
+if __name__ == "__main__":
+    main()    
