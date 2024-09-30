@@ -6,9 +6,10 @@ if len(sys.argv) != 2:
     print("Usage: python script.py <filename>")
     sys.exit(1)
 
+
 def getfactors(n):
     if n <= 1:
-        return (n , 1)
+        return (n, 1)
     if n % 2 == 0:
         return (n // 2, 2)
     sqrt_n = math.isqrt(n)
@@ -17,11 +18,12 @@ def getfactors(n):
             return (n // i, i)
     return (n, 1)
 
+
 def main():
     if len(sys.argv) != 2:
         print("USAGE: factors <file>")
         sys.exit(1)
-    
+
     filename = sys.argv[1]
 
     try:
@@ -43,5 +45,6 @@ def main():
         print(f"Error: Can't open file {filename}")
         sys.exit(1)
 
+
 if __name__ == "__main__":
-    main()    
+    main()
