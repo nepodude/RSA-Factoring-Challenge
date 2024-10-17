@@ -54,7 +54,15 @@ void factorize(unsigned __int128 n)
 {
 	unsigned __int128 p, q;
 
-	for (p = 2; p * p <= n; p++)
+	if (n % 2 == 0)
+	{
+		q = n / 2;
+		print_uint128(n);
+		printf("=%llu*%llu\n", (unsigned long long)q, (unsigned long long)2);
+		return;
+	}
+
+	for (p = 3; p * p <= n; p += 2)
 	{
 		if (n % p == 0)
 		{
@@ -97,7 +105,6 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 
-	unsigned __int128 n;
 	char buffer[40];
 
 	while (fgets(buffer, sizeof(buffer), file))
